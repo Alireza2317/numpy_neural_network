@@ -21,7 +21,7 @@ now that you have installed all the dependencies, you can start working with the
 ### Mnist dataset - handwritten digits recognition
 This is sort of the 'hello world' of the artificial intelligence realm, so we'll try to use this dataset to train and test the network. `app_mnist.ipynb` notebook is dedicated and designed only for that specific dataset. It's a network with 784 input neurons(since the dataset consists of images with size 28*28 pixels), two internal hidden layers containing 16 neurons each, and finally an output layer with 10 neurons, each corresponding to one digit. The network can be told to use different kinds of activation functions like sigmoid, ReLU and tanh.
 
-This simple network can reach up to 95% accuracy on the test data, which is not that bad. However the problem with this notebook is, the network's design is not at all flexible! The networks structure, meaning the number of layers and the number of neurons in each layer can't be easily changed. and this led me to build a class that handles all that and is super flexible in that regard.
+This simple network can reach up to 95% accuracy on the test data, which is not that bad. However the problem with this notebook is, the network's design is not at all flexible! The networks structure, meaning the number of layers and the number of neurons in each layer can't be easily changed. and this led me to build a class that handles all that and is super flexible regarding this issue.
 
 ### Flexible Neural Network
 As mentioned, the constraints of the previous approach led me to create another notebook and basically another python class for a neural network so that it is flexible enough to be used easily to expirement how different changes affect how the neural network learns.
