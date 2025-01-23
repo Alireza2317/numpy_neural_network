@@ -5,29 +5,607 @@ from datetime import datetime
 
 
 class NeuralNetwork:
+	""" A fully-connected neural network. Implemented using only numpy. """
 	""" A fully connected neural network. Implemented using only numpy. """
+	""" A fully-connected neural network. Implemented using only numpy. """
 
 	def __init__(
 		self,
 		structure: list[int],
 		parameters: np.ndarray | None = None,
+		activations: list[Activation] | Activation = Activation.Sigmoid
+		activations: list[Activation] | Activation = Activation.Sigmoid
 		activations: list[str] | str = 'sigmoid'
+		activations: list[Activation] | Activation = Activation.Sigmoid
+		activations: list[Activation] | Activation = Activation.Sigmoid
+		activations: list[str] | str = 'sigmoid'
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		activations: list[Activation] | Activation = Activation.Sigmoid
+		activations: list[Activation] | Activation = Activation.Sigmoid
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		activations: list[str] | str = 'sigmoid'
+		activations: list[Activation] | Activation = Activation.Sigmoid
+		activations: list[Activation] | Activation = Activation.Sigmoid
+		activations: list[str] | str = 'sigmoid'
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		activations: list[Activation] | Activation = Activation.Sigmoid
 	) -> None:
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
 		if len(structure) < 3:
 			raise ValueError(
 				'The network should have 3 layers minimum! At least 1 hidden layer. '
 			)
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		activations: list[Activation] | Activation = Activation.Sigmoid
+	) -> None:
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		activations: list[Activation] | Activation = Activation.Sigmoid
+	) -> None:
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
 		self.structure: list[int] = structure
 
 		# number of layers, except the input layer
 		self._L: int = len(structure) - 1
 
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		activations: list[Activation] | Activation = Activation.Sigmoid
+	) -> None:
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		self.structure: list[int] = structure
+
+		# number of layers, except the input layer
+		self._L: int = len(structure) - 1
+
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
 		# calculation of the correct number of parameters
 		self._NUMBER_OF_PARAMS: int = 0
 		for i in range(self._L):
 			# number of weights
 			self._NUMBER_OF_PARAMS += self.structure[i] * self.structure[i+1]
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+			# number of biases
+			self._NUMBER_OF_PARAMS += self.structure[i+1]
 
+
+		self._weights_shapes: list[tuple[int, int]] = []
+		self._biases_shapes: list[tuple[int, int]] = []
+		# computing the appropriate shape of each weights matrix between layers
+		for i in range(self._L):
+			self._weights_shapes.append((self.structure[i+1], self.structure[i]))
+			self._biases_shapes.append((self.structure[i+1], 1))
+		# setting self._weights_shapes and self._biases_shapes
+		self._calc_weight_bias_shapes()
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		self.structure: list[int] = structure
+
+		# number of layers, except the input layer
+		self._L: int = len(structure) - 1
+
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+		# calculation of the correct number of parameters
+		self._NUMBER_OF_PARAMS: int = 0
+		for i in range(self._L):
+			# number of weights
+			self._NUMBER_OF_PARAMS += self.structure[i] * self.structure[i+1]
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
 			# number of biases
 			self._NUMBER_OF_PARAMS += self.structure[i+1]
 
@@ -39,12 +617,244 @@ class NeuralNetwork:
 			self._weights_shapes.append((self.structure[i+1], self.structure[i]))
 			self._biases_shapes.append((self.structure[i+1], 1))
 
+		# setting self._weights_shapes and self._biases_shapes
+		self._calc_weight_bias_shapes()
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
 
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		self.structure: list[int] = structure
+
+		# number of layers, except the input layer
+		self._L: int = len(structure) - 1
+
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+		# calculation of the correct number of parameters
+		self._NUMBER_OF_PARAMS: int = 0
+		for i in range(self._L):
+			# number of weights
+			self._NUMBER_OF_PARAMS += self.structure[i] * self.structure[i+1]
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+			# number of biases
+			self._NUMBER_OF_PARAMS += self.structure[i+1]
+
+
+		self._weights_shapes: list[tuple[int, int]] = []
+		self._biases_shapes: list[tuple[int, int]] = []
+		# computing the appropriate shape of each weights matrix between layers
+		for i in range(self._L):
+			self._weights_shapes.append((self.structure[i+1], self.structure[i]))
+			self._biases_shapes.append((self.structure[i+1], 1))
+
+		# setting self._weights_shapes and self._biases_shapes
+		self._calc_weight_bias_shapes()
 		#? if the parameters is passed to __init__, then set the weights and biases based on that
 		if isinstance(parameters, np.ndarray):
 			# check the shape before assignment
 			if (s := max(parameters.shape)) != self._NUMBER_OF_PARAMS:
 				raise ValueError(f'parameters should be of shape ({self._NUMBER_OF_PARAMS}, 1). Got {s} instead.')
+		# setting self._weights_shapes and self._biases_shapes
+		self._calc_weight_bias_shapes()
+			)
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		"""
+		Initializes a fully-connected neural network.
+
+		Args:
+			structure: is a list which each element shows the number of neurons in that
+				layer. the first element is the input layer.
+			parameters(optional): networks pre-trained or desired parameters to be loaded
+				to the network
+			activations: either a list with len(structure)-1 elements of Activation objects
+				or a single Activation object that will be applied to all layers.
+
+		Raises:
+			ValueError:
+				- if structure has less than 3 elements
+				- if parameters is of the wrong size and shape
+				- if activation does not have len(structure)-1 elements
+		"""
+
+		if len(structure) < 3:
+			raise ValueError(
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
+			)
+
+
+		self.structure: list[int] = structure
+
+		# number of layers, except the input layer
+		self._L: int = len(structure) - 1
+
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+		# calculation of the correct number of parameters
+		self._NUMBER_OF_PARAMS: int = 0
+		for i in range(self._L):
+			# number of weights
+			self._NUMBER_OF_PARAMS += self.structure[i] * self.structure[i+1]
+		# calculation of the correct NUMBER_OF_PARAMS
+		self._calc_num_parameters()
+			# number of biases
+			self._NUMBER_OF_PARAMS += self.structure[i+1]
+
+
+		self._weights_shapes: list[tuple[int, int]] = []
+		self._biases_shapes: list[tuple[int, int]] = []
+		# computing the appropriate shape of each weights matrix between layers
+		for i in range(self._L):
+			self._weights_shapes.append((self.structure[i+1], self.structure[i]))
+			self._biases_shapes.append((self.structure[i+1], 1))
+
+		# setting self._weights_shapes and self._biases_shapes
+		self._calc_weight_bias_shapes()
+		#? if the parameters is passed to __init__, then set the weights and biases based on that
+		if isinstance(parameters, np.ndarray):
+			# check the shape before assignment
+			if (s := max(parameters.shape)) != self._NUMBER_OF_PARAMS:
+				raise ValueError(f'parameters should be of shape ({self._NUMBER_OF_PARAMS}, 1). Got {s} instead.')
+		# setting self._weights_shapes and self._biases_shapes
+		self._calc_weight_bias_shapes()
 
 		# if the parameters is passed to __init__
 		if parameters is not None:
@@ -56,8 +866,6 @@ class NeuralNetwork:
 		else:
 			self._init_rand_weights_biases()
 
-			# sets self.parameters, based on weights and biases
-			self.recompute_parameters()
 
 
 		#* type of activation
@@ -152,56 +960,25 @@ class NeuralNetwork:
 			0.05 * np.random.randn(*shape) for shape in self._biases_shapes
 		]
 
-	@property
-	def parameters(self):
-		"""	This is a full flattened version of self.weights and self.biases. """
 
-		return np.hstack(
-			[ws.flatten() for ws in self.weights] + [bs.flatten() for bs in self.biases]
-		).reshape((-1, 1))
+	def _calc_num_parameters(self):
+		self.NUMBER_OF_PARAMS: int = 0
+		for i in range(self._L):
+			# number of weights
+			self.NUMBER_OF_PARAMS += self.structure[i] * self.structure[i+1]
 
-
-	@property.setter
-	def parameters(self, new_params):
-		"""
-		This method will set self.parameters property(automatically) and update
-		self.weights and self.biases based on it, so that they are always synced
-		"""
-
-		# if the parameters is passed and is of incorrect shape, stop
-		if isinstance(new_params, np.ndarray):
-			if new_params.shape != (self.NUMBER_OF_PARAMS, 1):
-				raise ValueError(f'parameters should be of shape {(self.NUMBER_OF_PARAMS, 1)}.')
+			# number of biases
+			self.NUMBER_OF_PARAMS += self.structure[i+1]
 
 
-		self.weights: list[np.ndarray] = []
-		self.biases: list[np.ndarray] = []
+	def _calc_weight_bias_shapes(self):
+		self._weights_shapes: list[tuple[int, int]] = []
+		self._biases_shapes: list[tuple[int, int]] = []
+		# computing the appropriate shape of each weights matrix between layers
+		for i in range(self._L):
+			self._weights_shapes.append((self.structure[i+1], self.structure[i]))
+			self._biases_shapes.append((self.structure[i+1], 1))
 
-		# grab the parameters for weights
-		count: int = 0
-		for shape in self._weights_shapes:
-			total = shape[0] * shape[1]
-			ws = self.parameters.T[0][count:count+total].reshape(shape)
-			self.weights.append(ws)
-
-			count += total
-
-		# grab the parameters for biases
-		for shape in self._biases_shapes:
-			total = shape[0]
-			bs = self.parameters.T[0][count:count+total].reshape(shape)
-			self.biases.append(bs)
-
-			count += total
-
-
-	def _init_rand_weights_biases(self):
-		self.weights: list[np.ndarray] = [
-				0.1 * np.random.randn(*shape) for shape in self._weights_shapes
-		]
-		self.biases: list[np.ndarray] = [
-			0.05 * np.random.randn(*shape) for shape in self._biases_shapes
-		]
 
 	def load_input_layer(self, input_vector: np.ndarray) -> None:
 		#* input_vector.shape = (self.structure[0], 1)
