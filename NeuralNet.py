@@ -46,15 +46,15 @@ class NeuralNetwork:
 			if (s := max(parameters.shape)) != self._NUMBER_OF_PARAMS:
 				raise ValueError(f'parameters should be of shape ({self._NUMBER_OF_PARAMS}, 1). Got {s} instead.')
 
+		# if the parameters is passed to __init__
+		if parameters is not None:
+			# shape is checked in the property.setter
+			# this will also update weights and biases
 			self.parameters: np.ndarray = parameters
 
-			# setting both self.weights and self.biases, based on parameters
-			self.parse_parameters()
-
-		#? if parameters is not passed to __init__ set them randomly
+		# if parameters is not passed to __init__ set them randomly
 		else:
-			self.weights: list[np.ndarray] = [0.1 * np.random.randn(*shape) for shape in self._weights_shapes]
-			self.biases: list[np.ndarray] = [0.05 * np.random.randn(*shape) for shape in self._biases_shapes]
+			self._init_rand_weights_biases()
 
 			# sets self.parameters, based on weights and biases
 			self.recompute_parameters()
@@ -100,6 +100,108 @@ class NeuralNetwork:
 
 		self.feed_forward()
 
+
+	@property
+	def parameters(self):
+		"""	This is a full flattened version of self.weights and self.biases. """
+
+		return np.hstack(
+			[ws.flatten() for ws in self.weights] + [bs.flatten() for bs in self.biases]
+		).reshape((-1, 1))
+
+
+	@property.setter
+	def parameters(self, new_params):
+		"""
+		This method will set self.parameters property(automatically) and update
+		self.weights and self.biases based on it, so that they are always synced
+		"""
+
+		# if the parameters is passed and is of incorrect shape, stop
+		if isinstance(new_params, np.ndarray):
+			if new_params.shape != (self.NUMBER_OF_PARAMS, 1):
+				raise ValueError(f'parameters should be of shape {(self.NUMBER_OF_PARAMS, 1)}.')
+
+
+		self.weights: list[np.ndarray] = []
+		self.biases: list[np.ndarray] = []
+
+		# grab the parameters for weights
+		count: int = 0
+		for shape in self._weights_shapes:
+			total = shape[0] * shape[1]
+			ws = self.parameters.T[0][count:count+total].reshape(shape)
+			self.weights.append(ws)
+
+			count += total
+
+		# grab the parameters for biases
+		for shape in self._biases_shapes:
+			total = shape[0]
+			bs = self.parameters.T[0][count:count+total].reshape(shape)
+			self.biases.append(bs)
+
+			count += total
+
+
+	def _init_rand_weights_biases(self):
+		self.weights: list[np.ndarray] = [
+				0.1 * np.random.randn(*shape) for shape in self._weights_shapes
+		]
+		self.biases: list[np.ndarray] = [
+			0.05 * np.random.randn(*shape) for shape in self._biases_shapes
+		]
+
+	@property
+	def parameters(self):
+		"""	This is a full flattened version of self.weights and self.biases. """
+
+		return np.hstack(
+			[ws.flatten() for ws in self.weights] + [bs.flatten() for bs in self.biases]
+		).reshape((-1, 1))
+
+
+	@property.setter
+	def parameters(self, new_params):
+		"""
+		This method will set self.parameters property(automatically) and update
+		self.weights and self.biases based on it, so that they are always synced
+		"""
+
+		# if the parameters is passed and is of incorrect shape, stop
+		if isinstance(new_params, np.ndarray):
+			if new_params.shape != (self.NUMBER_OF_PARAMS, 1):
+				raise ValueError(f'parameters should be of shape {(self.NUMBER_OF_PARAMS, 1)}.')
+
+
+		self.weights: list[np.ndarray] = []
+		self.biases: list[np.ndarray] = []
+
+		# grab the parameters for weights
+		count: int = 0
+		for shape in self._weights_shapes:
+			total = shape[0] * shape[1]
+			ws = self.parameters.T[0][count:count+total].reshape(shape)
+			self.weights.append(ws)
+
+			count += total
+
+		# grab the parameters for biases
+		for shape in self._biases_shapes:
+			total = shape[0]
+			bs = self.parameters.T[0][count:count+total].reshape(shape)
+			self.biases.append(bs)
+
+			count += total
+
+
+	def _init_rand_weights_biases(self):
+		self.weights: list[np.ndarray] = [
+				0.1 * np.random.randn(*shape) for shape in self._weights_shapes
+		]
+		self.biases: list[np.ndarray] = [
+			0.05 * np.random.randn(*shape) for shape in self._biases_shapes
+		]
 
 	def load_input_layer(self, input_vector: np.ndarray) -> None:
 		#* input_vector.shape = (self.structure[0], 1)
