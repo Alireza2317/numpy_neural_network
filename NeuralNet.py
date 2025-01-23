@@ -51,8 +51,8 @@ class NeuralNetwork:
 
 		#? if parameters is not passed to __init__ set them randomly
 		else:
-			self.weights: list[np.ndarray] = [np.random.randn(*shape) for shape in self._weights_shapes]
-			self.biases: list[np.ndarray] = [np.random.randn(*shape) for shape in self._biases_shapes]
+			self.weights: list[np.ndarray] = [0.1 * np.random.randn(*shape) for shape in self._weights_shapes]
+			self.biases: list[np.ndarray] = [0.05 * np.random.randn(*shape) for shape in self._biases_shapes]
 
 			# sets self.parameters, based on weights and biases
 			self.recompute_parameters()
@@ -107,7 +107,7 @@ class NeuralNetwork:
 		self.input_layer = input_vector
 
 
-	def cost_of_single_sample(self, sample: np.ndarray, true_label: int) -> float:
+	def cost_of_single_sample(self, sample: np.ndarray, true_y: np.ndarray) -> float:
 		#* input_vector.shape = (self.layers_structure[0], 1)
 		if sample.shape != (self.layers_structure[0], 1):
 			raise ValueError(f'input should be of shape {(self.layers_structure[0], 1)}. got {sample.shape} instead')
@@ -116,25 +116,21 @@ class NeuralNetwork:
 		self.feed_forward()
 
 
-		# construct the output vector based on the label
-		desired_output = np.zeros((self.layers_structure[-1], 1))
-		desired_output[true_label] = 1.0
-
-		# compare the self.layers[-1] and the desired_output
-		# using mean squared error
-		cost = np.sum((self.layers[-1] - desired_output)**2)
+		# compare the self.layers[-1] and the true output
+		# using mean squared error or MSE
+		cost = (1 / len(true_y)) * np.sum((self.layers[-1] - true_y)**2)
 		return cost
 
 
-	def cost_of_test_data(self, test_samples: np.ndarray, true_labels: np.ndarray) -> float:
-		# samples.shape = (self.layers_structure[0], m)
-	 	# true_labels.shape = (1, m)
-		# samples: is a np array which each col represents one sample
+	def cost_of_test_data(self, test_samples: np.ndarray, true_outputs: np.ndarray) -> float:
+		# test_samples.shape = (self.layers_structure[0], m)
+		# test_samples: is a np array which each col represents one sample
+	 	# true_outputs.shape = (self.layers_structure[-1], m)
 
 		MSE: float = 0
-		for sample, label in zip(test_samples.T, true_labels[0]):
+		for sample, output in zip(test_samples.T, true_outputs.T):
 			sample = sample.reshape((-1, 1))
-			MSE += self.cost_of_single_sample(sample, label)
+			MSE += self.cost_of_single_sample(sample, output)
 
 		M = len(test_samples.T)
 		MSE = (1 / M) * MSE
@@ -162,10 +158,13 @@ class NeuralNetwork:
 		return (trues / total)
 
 
-	def predict_output(self, sample: np.ndarray) -> np.ndarray:
+	def predict_output(self, sample: np.ndarray | list) -> np.ndarray:
 		"""
 		This method takes in a single sample and outputs the entire output layer.
 		"""
+		if isinstance(sample, list):
+			sample = np.array(sample).reshape((-1, 1))
+
 		#* sample.shape = (self.layers_structure[0], 1)
 		if sample.shape != (self.layers_structure[0], 1):
 			raise ValueError(f'{sample.shape} is a bad shape for input. should be {(self.layers_structure[0], 1)}.')
@@ -184,23 +183,24 @@ class NeuralNetwork:
 		return np.argmax(output_vector)
 
 
-	def _backprop_one_sample(self, sample: np.ndarray, label: int) -> tuple:
+	def _backprop_one_sample(self, sample: np.ndarray, output: np.ndarray) -> tuple:
 		"""
 		This method holds all the math and calculus behind backpropagation
 		it calculates the derivitive of the cost w.r.t all the weights and
 		biases of the network, for only ONE training data
+		inputs:
+			sample.shape = (self.layers_structure[0], 1)
+			output.shape = (self.layers_structure[-1], 1)
+		returns:
+			(dw, d)
 		"""
 
 		self.load_input_layer(input_vector=sample)
 		self.feed_forward()
 
-		#* convert the label in int format into a one-hot vector
-		desired_output = np.zeros(self.layers[-1].shape)
-		desired_output[label] = 1.0
-
 		#* d_cost_p_ol.shape = (self.layers_structure[-1], 1)
-		#* derivative of mean squared error
-		d_cost_p_ol = 2 * (self.layers[-1] - desired_output)
+		#* derivative of mean squared error or MSE
+		d_cost_p_ol = 2 * (self.layers[-1] - output)
 
 		#* d_activation(z_ol)
 		#* times the gradient of the cost w.r.t activations of the output layer
@@ -259,11 +259,13 @@ class NeuralNetwork:
 		"""
 		This method will run the backprop_one_sample method for a dataset and
 		take the average of all the gradients of the weights and biases
+		returns:
+			(dw, db)
 		"""
 
 		#* m training samples
 		#* x_train.shape = (self.layers_structure[0], m)
-		#* y_train.shape = (1, m)
+		#* y_train.shape = (self.layers_structure[-1], m)
 
 		# average derivative of cost w.r.t weights
 		dw: list[np.ndarray] = [np.zeros(shape) for shape in self._weights_shapes]
@@ -271,13 +273,15 @@ class NeuralNetwork:
 		# average derivative of cost w.r.t biases
 		db: list[np.ndarray] = [np.zeros(shape) for shape in self._biases_shapes]
 
-		for features, label in zip(x_train.T, y_train[0]):
-			#* label: int
-			#* features.shape = (self.layers_structure[0], 1)
+		for features, output in zip(x_train.T, y_train.T):
+			# reshape the variables to appropriate shapes
+			#* output.shape -> (self.layers_structure[-1], 1)
+			#* features.shape -> (self.layers_structure[0], 1)
 			features = features.reshape((-1, 1))
+			output = output.reshape((-1, 1))
 
 			#* label in this method should be an int
-			tdw, tdb = self._backprop_one_sample(sample=features, label=label)
+			tdw, tdb = self._backprop_one_sample(sample=features, output=output)
 
 			for i in range(self._L):
 				dw[i] += tdw[i]
@@ -397,66 +401,43 @@ class NeuralNetwork:
 			constant_lr: bool = False,
 			decay_rate: float = 0.1,
 			number_of_epochs: int = 80,
-			mini_batches_size: int = 100,
-			quiet: bool = False
+			batch_size: int = 32,
+			verbose: bool = False
 	) -> None:
 		"""Trains the model with the labeled training data"""
 
-		if x_train.shape[1] > mini_batches_size:
-			raise ValueError(
-				f'Batch size should be <= to the number of training samples!'
-			)
-
-		#* initialize the parameters randomly
 		#* it is assumed that the parameters are initialized randomly
 
 		#* m training samples
 		#* x_train.shape = (self.layers_structure[0], m)
-		#* y_train.shape = (1, m)
+		#* y_train.shape = (self.layers_structure[-1], m)
+		m = x_train.shape[1]
 
-		#* first we'd better attach the x_train and y_train together
-		#* then we can shuffle the training data
-		#* and then seperate the x and y again
-		#* add y row to the 0-th row of train_data
-		train_data = np.vstack((y_train, x_train))
-
-		#! now because shuffle, shuffles the array based on the rows
-		#! but we need to shuffle the data based on the coloumns
-		#! we have to transpose it twice to get around this
-		train_data = train_data.T
-		np.random.shuffle(train_data)
-		train_data = train_data.T
+		# shuffle the training data to avoid biases in the training
+		# shuffling along columns
+		shuffled_indices = np.random.permutation(m)
+		shuffled_x = x_train[:, shuffled_indices]
+		shuffled_y = y_train[:, shuffled_indices]
 
 		#* now that the data is shuffled properly
-		#* we should divide the data into mini-batches
-		mini_batches: list[np.ndarray] = [
-			train_data[:, count:count+mini_batches_size]
-			for count in range(0, len(train_data.T), mini_batches_size)
-		]
+		#* we should divide the data into batches
+		num_batches = m // batch_size
 
+		# split column-wise
+		batches_x = np.array_split(shuffled_x, num_batches, axis=1)
+		batches_y = np.array_split(shuffled_y, num_batches, axis=1)
 
-		#* keep track of the accuracy scores and costs, to plot later
-		if not quiet:
-			scores: list[float] = []
-			costs: list[float] = []
 
 		initial_lr: float = learning_rate
 		for epoch in range(number_of_epochs):
-			#* now each mini-batch corresponds to one step at gradient descent
-			#* batch.shape = (self.layers_structure[0]+1, mini_batches_size), the label and the features
-			for batch in mini_batches:
-				#* batch.shape = (self.layers_structure[0]+1, mini_batches_size)
-				x_train_batch = batch[1:] # (self.layers_structure[0], mini_batches_size)
-				y_train_batch = batch[0:1] # (1, mini_batches_size)
-
-				# now because y_train_batch holds the labels, and they should be int
-				# int8 is enough because we know labels are single digit ints
-				y_train_batch = y_train_batch.astype(np.int8)
-
-				#* the backprop algorithm will run for each batch, one step downhill towards a local minima
-				#* it also updates the self.layers[-1](output layer)
+			#* now each batch corresponds to one step at gradient descent
+			#* batch_x.shape = (self.layers_structure[0], batch_size), the features
+			#* batch_y.shape = (self.layers_structure[-1], batch_size), the true output
+			for batch_x, batch_y in zip(batches_x, batches_y):
+				#* the backprop algorithm will run for each batch, one step downhill towards a local minimum
+				#* it also updates the self.layers[-1] (output layer)
 				#* and consequently the cost, by running self.feed_forward
-				dw, db = self.backpropagation(x_train_batch, y_train_batch)
+				dw, db = self.backpropagation(batch_x, batch_y)
 
 				if constant_lr:
 					lr = learning_rate
@@ -467,18 +448,10 @@ class NeuralNetwork:
 				#* change each of the weights and biases accordingly
 				self._update_parameters(dw, db, learning_rate=lr)
 
-			#* parameters are updated now
-			if quiet: continue
-
-			score = self.accuracy_score(x_train, y_train)*100
 			cost = 	self.cost_of_test_data(x_train, y_train)
-			scores.append(score)
-			costs.append(cost)
-			print(f'epoch {epoch+1}:\taccuracy = {score:.2f}%\tcost = {cost:.4f}')
-
-		if quiet: return
-		self.plot_scores(number_of_epochs, scores, costs)
-
+			if verbose:
+				print(f'epoch {epoch+1}:\tcost = {cost:.4f}')
+				
 
 	def plot_scores(self, num_epochs: int, scores: list[float], costs: list[float]) -> None:
 		epochs_range =  list(range(1, num_epochs+1))
