@@ -18,7 +18,7 @@ def main():
 
 	np.random.seed(42)
 	ps = np.random.randn(13002, 1)
-	NN = NeuralNetwork(layers_structure=[784, 16, 16, 10], parameters=ps, activations='sigmoid')
+	NN = NeuralNetwork(structure=[784, 16, 16, 10], parameters=ps, activations='sigmoid')
 	NN.parse_parameters(parameters=ps)
 
 	NN.print_stat(x_test, y_test)

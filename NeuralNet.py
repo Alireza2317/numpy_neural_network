@@ -5,37 +5,39 @@ from datetime import datetime
 
 
 class NeuralNetwork:
+	""" A fully connected neural network. Implemented using only numpy. """
+
 	def __init__(
 		self,
-		layers_structure: list[int],
+		structure: list[int],
 		parameters: np.ndarray | None = None,
 		activations: list[str] | str = 'sigmoid'
 	) -> None:
-		if len(layers_structure) < 3:
+		if len(structure) < 3:
 			raise ValueError(
-				'The network should have 3 layers minimum!(input layer + (at least one) hidden layer + output layer.)'
+				'The network should have 3 layers minimum! At least 1 hidden layer. '
 			)
-		self.layers_structure: list[int] = layers_structure
+		self.structure: list[int] = structure
 
 		# number of layers, except the input layer
-		self._L: int = len(layers_structure) - 1
+		self._L: int = len(structure) - 1
 
 		# calculation of the correct number of parameters
 		self._NUMBER_OF_PARAMS: int = 0
 		for i in range(self._L):
 			# number of weights
-			self._NUMBER_OF_PARAMS += self.layers_structure[i] * self.layers_structure[i+1]
+			self._NUMBER_OF_PARAMS += self.structure[i] * self.structure[i+1]
 
 			# number of biases
-			self._NUMBER_OF_PARAMS += self.layers_structure[i+1]
+			self._NUMBER_OF_PARAMS += self.structure[i+1]
 
 
 		self._weights_shapes: list[tuple[int, int]] = []
 		self._biases_shapes: list[tuple[int, int]] = []
 		# computing the appropriate shape of each weights matrix between layers
 		for i in range(self._L):
-			self._weights_shapes.append((self.layers_structure[i+1], self.layers_structure[i]))
-			self._biases_shapes.append((self.layers_structure[i+1], 1))
+			self._weights_shapes.append((self.structure[i+1], self.structure[i]))
+			self._biases_shapes.append((self.structure[i+1], 1))
 
 
 		#? if the parameters is passed to __init__, then set the weights and biases based on that
@@ -66,7 +68,7 @@ class NeuralNetwork:
 
 		if len(activations) != self._L:
 			raise ValueError(
-				f'activation list should be of size [len(layers_structure)-1]={self._L}.\n Got {len(activation)} instead.'
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
 			)
 
 		self.activation_funcs: list[Callable] = []
@@ -90,7 +92,7 @@ class NeuralNetwork:
 					raise ValueError('activations can be a member of ["sigmoid", "relu", "tanh", "no-activation"]')
 
 		# initialize all the neurons with zero
-		self.input_layer: np.ndarray = np.zeros((self.layers_structure[0], 1))
+		self.input_layer: np.ndarray = np.zeros((self.structure[0], 1))
 
 		# to initialize all z, and activations
 		self.z_layers = [None for _ in range(self._L)]
@@ -100,17 +102,17 @@ class NeuralNetwork:
 
 
 	def load_input_layer(self, input_vector: np.ndarray) -> None:
-		#* input_vector.shape = (self.layers_structure[0], 1)
-		if input_vector.shape != (self.layers_structure[0], 1):
-			raise ValueError(f'input should be of shape {(self.layers_structure[0], 1)}. got {input_vector.shape} instead')
+		#* input_vector.shape = (self.structure[0], 1)
+		if input_vector.shape != (self.structure[0], 1):
+			raise ValueError(f'input should be of shape {(self.structure[0], 1)}. got {input_vector.shape} instead')
 
 		self.input_layer = input_vector
 
 
 	def cost_of_single_sample(self, sample: np.ndarray, true_y: np.ndarray) -> float:
-		#* input_vector.shape = (self.layers_structure[0], 1)
-		if sample.shape != (self.layers_structure[0], 1):
-			raise ValueError(f'input should be of shape {(self.layers_structure[0], 1)}. got {sample.shape} instead')
+		#* input_vector.shape = (self.structure[0], 1)
+		if sample.shape != (self.structure[0], 1):
+			raise ValueError(f'input should be of shape {(self.structure[0], 1)}. got {sample.shape} instead')
 
 		self.load_input_layer(input_vector=sample)
 		self.feed_forward()
@@ -123,9 +125,9 @@ class NeuralNetwork:
 
 
 	def cost_of_test_data(self, test_samples: np.ndarray, true_outputs: np.ndarray) -> float:
-		# test_samples.shape = (self.layers_structure[0], m)
+		# test_samples.shape = (self.structure[0], m)
 		# test_samples: is a np array which each col represents one sample
-	 	# true_outputs.shape = (self.layers_structure[-1], m)
+	 	# true_outputs.shape = (self.structure[-1], m)
 
 		MSE: float = 0
 		for sample, output in zip(test_samples.T, true_outputs.T):
@@ -165,9 +167,9 @@ class NeuralNetwork:
 		if isinstance(sample, list):
 			sample = np.array(sample).reshape((-1, 1))
 
-		#* sample.shape = (self.layers_structure[0], 1)
-		if sample.shape != (self.layers_structure[0], 1):
-			raise ValueError(f'{sample.shape} is a bad shape for input. should be {(self.layers_structure[0], 1)}.')
+		#* sample.shape = (self.structure[0], 1)
+		if sample.shape != (self.structure[0], 1):
+			raise ValueError(f'{sample.shape} is a bad shape for input. should be {(self.structure[0], 1)}.')
 
 		self.load_input_layer(input_vector=sample)
 		self.feed_forward()
@@ -189,8 +191,8 @@ class NeuralNetwork:
 		it calculates the derivitive of the cost w.r.t all the weights and
 		biases of the network, for only ONE training data
 		inputs:
-			sample.shape = (self.layers_structure[0], 1)
-			output.shape = (self.layers_structure[-1], 1)
+			sample.shape = (self.structure[0], 1)
+			output.shape = (self.structure[-1], 1)
 		returns:
 			(dw, d)
 		"""
@@ -198,13 +200,13 @@ class NeuralNetwork:
 		self.load_input_layer(input_vector=sample)
 		self.feed_forward()
 
-		#* d_cost_p_ol.shape = (self.layers_structure[-1], 1)
+		#* d_cost_p_ol.shape = (self.structure[-1], 1)
 		#* derivative of mean squared error or MSE
 		d_cost_p_ol = 2 * (self.layers[-1] - output)
 
 		#* d_activation(z_ol)
 		#* times the gradient of the cost w.r.t activations of the output layer
-		#* error_ol.shape =(self.layers_structure[-1], 1)
+		#* error_ol.shape =(self.structure[-1], 1)
 		error_ol = self.d_activation_funcs[-1](self.z_layers[-1]) *  d_cost_p_ol
 
 		# error of all the other layers, except the last layer and the input layer
@@ -264,8 +266,8 @@ class NeuralNetwork:
 		"""
 
 		#* m training samples
-		#* x_train.shape = (self.layers_structure[0], m)
-		#* y_train.shape = (self.layers_structure[-1], m)
+		#* x_train.shape = (self.structure[0], m)
+		#* y_train.shape = (self.structure[-1], m)
 
 		# average derivative of cost w.r.t weights
 		dw: list[np.ndarray] = [np.zeros(shape) for shape in self._weights_shapes]
@@ -275,8 +277,8 @@ class NeuralNetwork:
 
 		for features, output in zip(x_train.T, y_train.T):
 			# reshape the variables to appropriate shapes
-			#* output.shape -> (self.layers_structure[-1], 1)
-			#* features.shape -> (self.layers_structure[0], 1)
+			#* output.shape -> (self.structure[-1], 1)
+			#* features.shape -> (self.structure[0], 1)
 			features = features.reshape((-1, 1))
 			output = output.reshape((-1, 1))
 
@@ -409,8 +411,8 @@ class NeuralNetwork:
 		#* it is assumed that the parameters are initialized randomly
 
 		#* m training samples
-		#* x_train.shape = (self.layers_structure[0], m)
-		#* y_train.shape = (self.layers_structure[-1], m)
+		#* x_train.shape = (self.structure[0], m)
+		#* y_train.shape = (self.structure[-1], m)
 		m = x_train.shape[1]
 
 		# shuffle the training data to avoid biases in the training
@@ -431,8 +433,8 @@ class NeuralNetwork:
 		initial_lr: float = learning_rate
 		for epoch in range(number_of_epochs):
 			#* now each batch corresponds to one step at gradient descent
-			#* batch_x.shape = (self.layers_structure[0], batch_size), the features
-			#* batch_y.shape = (self.layers_structure[-1], batch_size), the true output
+			#* batch_x.shape = (self.structure[0], batch_size), the features
+			#* batch_y.shape = (self.structure[-1], batch_size), the true output
 			for batch_x, batch_y in zip(batches_x, batches_y):
 				#* the backprop algorithm will run for each batch, one step downhill towards a local minimum
 				#* it also updates the self.layers[-1] (output layer)
@@ -521,8 +523,8 @@ class NeuralNetwork:
 			self.layers[i] = self.activation_funcs[i](self.z_layers[i])
 
 
-		if self.layers[-1].shape != (self.layers_structure[-1], 1):
-			raise ValueError(f'{self.layers[-1].shape} is a bad shape! Should be {(self.layers_structure[-1], 1)}')
+		if self.layers[-1].shape != (self.structure[-1], 1):
+			raise ValueError(f'{self.layers[-1].shape} is a bad shape! Should be {(self.structure[-1], 1)}')
 
 
 	def print_network(self, hidden_layers = False) -> None:
