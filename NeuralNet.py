@@ -1,7 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from datetime import datetime
+from enum import Enum
+
+class Activation(Enum):
+	Sigmoid: str = 'sigmoid'
+	Relu: str = 'relu'
+	Tanh: str = 'tanh'
+	NoAct: str = 'no-activation'
+
 
 class ActivationFunction:
 	@staticmethod
@@ -46,7 +54,7 @@ class NeuralNetwork:
 		self,
 		structure: list[int],
 		parameters: np.ndarray | None = None,
-		activations: list[Activation] | Activation = Activation.Sigmoid
+		activations: Sequence[Activation] | Activation = Activation.Sigmoid
 	) -> None:
 		"""
 		Initializes a fully-connected neural network.
@@ -86,15 +94,555 @@ class NeuralNetwork:
 		if parameters is not None:
 			# shape is checked in the property.setter
 			# this will also update weights and biases
-			self.parameters: np.ndarray = parameters
-
-		# if parameters is not passed to __init__ set them randomly
-		else:
-			self._init_rand_weights_biases()
 
 
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
 
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
 		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
 		# if only a str, apply it to all layers
 		# if a list with size L(number_of_layers except input layer), apply individual activations
 		if isinstance(activations, str):
@@ -102,19 +650,2465 @@ class NeuralNetwork:
 
 		if len(activations) != self._L:
 			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		for activation in activations:
+			match activation:
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
 				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
 			)
 
 		self.activation_funcs: list[Callable] = []
 		self.d_activation_funcs: list[Callable] = []
+				case Activation.Sigmoid:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.sigmoid, ActivationFunction.d_sigmoid)
+					)
+				case Activation.Tanh:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.tanh, ActivationFunction.d_tanh)
+					)
+				case Activation.Relu:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.relu, ActivationFunction.d_relu)
+					)
+				case Activation.NoAct:
+					self.activation_derivative_pairs.append(
+						(lambda x: x, lambda x: x)
+					)
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
 
-		for activation in activations:
-			match activation:
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_funcs: list[Callable] = []
+		self.d_activation_funcs: list[Callable] = []
+				case Activation.Sigmoid:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.sigmoid, ActivationFunction.d_sigmoid)
+					)
+				case Activation.Tanh:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.tanh, ActivationFunction.d_tanh)
+					)
+				case Activation.Relu:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.relu, ActivationFunction.d_relu)
+					)
+				case Activation.NoAct:
+					self.activation_derivative_pairs.append(
+						(lambda x: x, lambda x: x)
+					)
+				case _:
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_funcs: list[Callable] = []
+		self.d_activation_funcs: list[Callable] = []
+				case Activation.Sigmoid:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.sigmoid, ActivationFunction.d_sigmoid)
+					)
+				case Activation.Tanh:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.tanh, ActivationFunction.d_tanh)
+					)
+				case Activation.Relu:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.relu, ActivationFunction.d_relu)
+					)
+				case Activation.NoAct:
+					self.activation_derivative_pairs.append(
+						(lambda x: x, lambda x: x)
+					)
 				case 'sigmoid':
 					self.activation_funcs.append(NeuralNetwork._sigmoid)
 					self.d_activation_funcs.append(NeuralNetwork._d_sigmoid)
 				case 'tanh':
-					self.activation_funcs.append(NeuralNetwork._tanh)
+				case Activation.Sigmoid:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.sigmoid, ActivationFunction.d_sigmoid)
+					)
+				case Activation.Tanh:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.tanh, ActivationFunction.d_tanh)
+					)
+				case Activation.Relu:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.relu, ActivationFunction.d_relu)
+					)
+				case Activation.NoAct:
+					self.activation_derivative_pairs.append(
+						(lambda x: x, lambda x: x)
+					)
 					self.d_activation_funcs.append(NeuralNetwork._d_tanh)
 				case 'relu':
 					self.activation_funcs.append(NeuralNetwork._ReLU)
@@ -122,17 +3116,433 @@ class NeuralNetwork:
 				case 'no-activation':
 					self.activation_funcs.append(lambda x: x)
 					self.d_activation_funcs.append(lambda x: x)
-				case _:
+					raise ValueError('activations should be of type Activation!')
 					raise ValueError('activations can be a member of ["sigmoid", "relu", "tanh", "no-activation"]')
 
-		# initialize all the neurons with zero
-		self.input_layer: np.ndarray = np.zeros((self.structure[0], 1))
+					raise ValueError('activations should be of type Activation!')
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
 
-		# to initialize all z, and activations
-		self.z_layers = [None for _ in range(self._L)]
-		self.layers = [None for _ in range(self._L)]
 
-		self.feed_forward()
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+			# this will also update weights and biases
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		# checking and setting the activation and their derivative functions
+		self.set_activations(activations)
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+
+
+
+
+	def set_activations(self, activations: list[Activation] | Activation):
+		"""
+		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
+			first element is the activation function and the other is its derivative
+		args:
+			activations: the input that is passed to __init__ which can either be a single Activation
+				or a list of Activation objects
+
+		raises:
+			ValueError:
+				- if activations is not a single Activation or a list of Activation objects
+				- if activations is a list but its length is not correct and equal to self._L
+				- if the list elements are not of type Activation
+
+		"""
+
+		# check the type of activations
+		# if a single Activation, apply it to all layers
+		# if a list with size L, apply individual activations
+		if isinstance(activations, Activation):
+			activations: list[Activation] = [activations for _ in range(self._L)]
+
+		if not isinstance(activations, Sequence):
+			raise ValueError(
+				f'activations should either be a single Activation or '
+				f'a list of Activation objects of size {self._L}.'
+			)
+		#* type of activation
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		# if only a str, apply it to all layers
+		# if a list with size L(number_of_layers except input layer), apply individual activations
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size len(structure)-1={self._L}.\n Got {len(activations)} instead.'
+		if isinstance(activations, str):
+			activations: list[str] = [activations for _ in range(self._L)]
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+
+		if len(activations) != self._L:
+			raise ValueError(
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_derivative_pairs = list[tuple[Callable, Callable]] = []
+				f'activation list should be of size [len(structure)-1]={self._L}.\n Got {len(activation)} instead.'
+			)
+
+		self.activation_funcs: list[Callable] = []
+		self.d_activation_funcs: list[Callable] = []
+				case Activation.Sigmoid:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.sigmoid, ActivationFunction.d_sigmoid)
+					)
+				case Activation.Tanh:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.tanh, ActivationFunction.d_tanh)
+					)
+				case Activation.Relu:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.relu, ActivationFunction.d_relu)
+					)
+				case Activation.NoAct:
+					self.activation_derivative_pairs.append(
+						(lambda x: x, lambda x: x)
+					)
+				case 'sigmoid':
+					self.activation_funcs.append(NeuralNetwork._sigmoid)
+					self.d_activation_funcs.append(NeuralNetwork._d_sigmoid)
+				case 'tanh':
+				case Activation.Sigmoid:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.sigmoid, ActivationFunction.d_sigmoid)
+					)
+				case Activation.Tanh:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.tanh, ActivationFunction.d_tanh)
+					)
+				case Activation.Relu:
+					self.activation_derivative_pairs.append(
+						(ActivationFunction.relu, ActivationFunction.d_relu)
+					)
+				case Activation.NoAct:
+					self.activation_derivative_pairs.append(
+						(lambda x: x, lambda x: x)
+					)
+					self.d_activation_funcs.append(NeuralNetwork._d_tanh)
+				case 'relu':
+					self.activation_funcs.append(NeuralNetwork._ReLU)
+					self.d_activation_funcs.append(NeuralNetwork._d_ReLU)
+				case 'no-activation':
+					self.activation_funcs.append(lambda x: x)
+					self.d_activation_funcs.append(lambda x: x)
+					raise ValueError('activations should be of type Activation!')
+					raise ValueError('activations can be a member of ["sigmoid", "relu", "tanh", "no-activation"]')
+
+					raise ValueError('activations should be of type Activation!')
 
 
 	@property
