@@ -11,7 +11,10 @@ class Activation(Enum):
 	NoAct: str = 'no-activation'
 
 
+
 class ActivationFunction:
+	""" Basic activation functions and their derivatives. """
+
 	@staticmethod
 	def sigmoid(z: np.ndarray) -> np.ndarray:
 		return 1 / (1 + np.exp(-z))
@@ -52,9 +55,9 @@ class NeuralNetwork:
 
 	def __init__(
 		self,
-		structure: list[int],
-		parameters: np.ndarray | None = None,
-		activations: Sequence[Activation] | Activation = Activation.Sigmoid
+		structure: Sequence[int],
+		activations: Sequence[Activation] | Activation,
+		parameters: np.ndarray | None = None
 	) -> None:
 		"""
 		Initializes a fully-connected neural network.
@@ -79,7 +82,7 @@ class NeuralNetwork:
 				'The network should have 3 layers minimum! At least 1 hidden layer. '
 			)
 
-		self.structure: list[int] = structure
+		self.structure: Sequence[int] = structure
 
 		# number of layers, except the input layer
 		self._L: int = len(structure) - 1
@@ -109,8 +112,9 @@ class NeuralNetwork:
 		self.init_all_neurons()
 
 
-	def init_nodes_and_layers(self):
-		# initialize all the neurons with zero
+	def init_all_neurons(self):
+		""" Initialize all neurons with zero. """
+
 		self.input_layer: np.ndarray = np.zeros((self.structure[0], 1))
 
 		# to initialize all z, and activations
@@ -123,7 +127,8 @@ class NeuralNetwork:
 	def set_activations(self, activations: list[Activation] | Activation):
 		"""
 		Setting up self.activation_derivative_pairs which holds a pair of functions for each layer
-			first element is the activation function and the other is its derivative
+		first element is the activation function and the other is its derivative
+
 		args:
 			activations: the input that is passed to __init__ which can either be a single Activation
 				or a list of Activation objects
@@ -178,7 +183,7 @@ class NeuralNetwork:
 
 
 	@property
-	def parameters(self):
+	def parameters(self) -> np.ndarray:
 		"""	This is a full flattened version of self.weights and self.biases. """
 
 		return np.hstack(
@@ -187,10 +192,10 @@ class NeuralNetwork:
 
 
 	@property.setter
-	def parameters(self, new_params):
+	def parameters(self, new_params: np.ndarray):
 		"""
 		This method will set self.parameters property(automatically) and update
-		self.weights and self.biases based on it, so that they are always synced
+		self.weights and self.biases based on it, so that they are always synced.
 		"""
 
 		# if the parameters is passed and is of incorrect shape, stop
@@ -221,15 +226,19 @@ class NeuralNetwork:
 
 
 	def _init_rand_weights_biases(self):
+		""" Initializes all weights and biases randomly. """
+
 		self.weights: list[np.ndarray] = [
-				0.1 * np.random.randn(*shape) for shape in self._weights_shapes
+				0.05 * np.random.randn(*shape) for shape in self._weights_shapes
 		]
 		self.biases: list[np.ndarray] = [
-			0.05 * np.random.randn(*shape) for shape in self._biases_shapes
+			0.01 * np.random.randn(*shape) for shape in self._biases_shapes
 		]
 
 
 	def _calc_num_parameters(self):
+		""" Calculate the total size of parameters. """
+
 		self.NUMBER_OF_PARAMS: int = 0
 		for i in range(self._L):
 			# number of weights
@@ -240,6 +249,8 @@ class NeuralNetwork:
 
 
 	def _calc_weight_bias_shapes(self):
+		""" Calculate the shapes of all the weights and biases. """
+
 		self._weights_shapes: list[tuple[int, int]] = []
 		self._biases_shapes: list[tuple[int, int]] = []
 		# computing the appropriate shape of each weights matrix between layers
@@ -449,22 +460,6 @@ class NeuralNetwork:
 		return (dw, db)
 
 
-	def recompute_parameters(self) -> None:
-		"""
-		This method will recompute self.parameters from the current self.weights and self.biases
-		"""
-		self.parameters = np.array([])
-		# first the weights
-		for ws in self.weights:
-			self.parameters = np.append(self.parameters, ws.flatten())
-		# then the biases
-		for bs in self.biases:
-			self.parameters = np.append(self.parameters, bs.flatten())
-
-
-		self.parameters = self.parameters.reshape((-1, 1))
-
-
 	def init_weights_biases(self, weights: list[np.ndarray], biases: list[np.ndarray]) -> None:
 		"""
 		This method will take in the weights and biases and set them in the network.
@@ -503,42 +498,6 @@ class NeuralNetwork:
 		#* now self.parameters, which basically is the flattened version of
 		#* all the weights and biases, should be updated as well
 		self.recompute_parameters()
-
-
-	def parse_parameters(self, parameters: np.ndarray | None = None) -> None:
-		"""
-		This method will parse self.parameters or the given parameters and set each parameter to
-		the corresponding weights and biases.
-		"""
-		# if the parameters is passed and is of incorrect shape, stop
-		if isinstance(parameters, np.ndarray):
-			if parameters.shape != (self.NUMBER_OF_PARAMS, 1):
-				raise ValueError(f'parameters should be of shape {(self.NUMBER_OF_PARAMS, 1)}.')
-
-			# update parameters
-			self.parameters = parameters
-
-		# otherwise use the current self.parameters
-
-		self.weights: list[np.ndarray] = []
-		self.biases: list[np.ndarray] = []
-
-		# grab the parameters for weights
-		count: int = 0
-		for shape in self._weights_shapes:
-			total = shape[0] * shape[1]
-			ws = self.parameters.T[0][count:count+total].reshape(shape)
-			self.weights.append(ws)
-
-			count += total
-
-		# grab the parameters for biases
-		for shape in self._biases_shapes:
-			total = shape[0]
-			bs = self.parameters.T[0][count:count+total].reshape(shape)
-			self.biases.append(bs)
-
-			count += total
 
 
 	def train(
