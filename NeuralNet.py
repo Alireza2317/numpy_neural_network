@@ -3,6 +3,41 @@ import matplotlib.pyplot as plt
 from collections.abc import Callable
 from datetime import datetime
 
+class ActivationFunction:
+	@staticmethod
+	def sigmoid(z: np.ndarray) -> np.ndarray:
+		return 1 / (1 + np.exp(-z))
+
+	@staticmethod
+	def  d_sigmoid(z: np.ndarray) -> np.ndarray:
+		return np.exp(-z) / (np.pow((1 + np.exp(-z)), 2))
+
+
+	@staticmethod
+	def relu(z: np.ndarray) -> np.ndarray:
+		return np.maximum(0, z)
+
+
+	@staticmethod
+	def d_relu(z: np.ndarray) -> np.ndarray:
+		return (z > 0).astype(np.float64)
+
+
+	@staticmethod
+	def tanh(z: np.ndarray) -> np.ndarray:
+		return np.tanh(z)
+
+
+	@staticmethod
+	def d_tanh(z: np.ndarray) -> np.ndarray:
+		return 4 * np.exp(2 * z) / np.power(np.exp(2*z) + 1, 2)
+
+
+	@staticmethod
+	def softmax(z: np.ndarray) -> np.ndarray:
+		return np.exp(-z) / np.sum(np.exp(-z))
+
+
 
 class NeuralNetwork:
 	""" A fully-connected neural network. Implemented using only numpy. """
