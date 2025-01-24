@@ -191,7 +191,7 @@ class NeuralNetwork:
 		).reshape((-1, 1))
 
 
-	@property.setter
+	@parameters.setter
 	def parameters(self, new_params: np.ndarray):
 		"""
 		This method will set self.parameters property(automatically) and update
