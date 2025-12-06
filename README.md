@@ -41,7 +41,7 @@ To validate the engine, the network was tested on the **MNIST handwritten digits
 ### 1. Installation
 
 ```bash
-git clone https://github.com/Alireza2317/numpy-neural-network
+git clone https://github.com/Alireza2317/numpy_neural_network
 cd numpy-neural-network
 
 # Create virtual env (Recommended)
