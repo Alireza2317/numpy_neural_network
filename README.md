@@ -1,43 +1,86 @@
-# Neural Networks Implementation From Scratch
-This project focuses on the internal mechanics and mathematics of neural networks and the basic concepts like:
-- what does actually a neuron do?
-- how should weights and biases be organized?
-- how to train the network?
-- how does backpropagation work?
-- and much more ...
+# NumPy Neural Network: Deep Learning from Scratch 🧠
 
-## Use case
-I think this project has 2 important use cases.
+![Python](https://img.shields.io/badge/python-gray?logo=python)
+![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy)
+![License](https://img.shields.io/badge/license-MIT-grey)
 
-1. If you are trying to learn the math behind the implementation of neural networks, this is a great place to start since this project uses nothing but math to build the network.
-2. If you need a simple neural network and don't want to install heavy-duty libraries like **tensorflow** or **pytorch**. This simple class can take care of it.
+A flexible, lightweight Deep Learning framework built entirely from scratch using **Python and NumPy**. No TensorFlow, no PyTorch. Just raw mathematics.
 
+This project focuses on the internal mechanics of Artificial Intelligence, answering fundamental questions such as:
+* **What actually is a neuron?**
+* **How should weights and biases be organized** in matrix form?
+* **How does the network learn** via backpropagation?
+* **How does the gradient descent algorithm** minimize error?
 
-## Getting Started
-The very first step would be to create a virtual enviornment and install all the requirements. You can do so by running these commands(on linux/mac):
+## 🎯 Use Cases
+This project serves two main purposes:
+
+1.  **Educational Deep Dive:** If you are trying to learn the math behind Neural Networks, this is the perfect starting point. The code relies solely on linear algebra and calculus, exposing the "black box" logic often hidden by high-level libraries.
+2.  **Lightweight Implementation:** If you need a simple neural network for a project and don't want the overhead of installing heavy-duty libraries like **TensorFlow** or **PyTorch**, this `NeuralNetwork` class provides a dependency-free solution.
+
+## ✨ Features: The Flexible Network
+To overcome the limitations of hard-coded tutorials, I developed a modular `NeuralNetwork` class (found in `NeuralNet.py` and `app.ipynb`) that allows for rapid experimentation.
+
+You can easily customize:
+* **Network Topology:** The number of layers and neurons per layer.
+* **Activations:** Sigmoid, ReLU, Tanh.
+* **Hyperparameters:**
+    * Learning Rate (with optional exponential decay)
+    * Number of Epochs
+    * Batch Size
+
+## 📊 Performance: MNIST Digit Recognition
+To validate the engine, the network was tested on the **MNIST handwritten digits dataset** (the "Hello World" of AI).
+
+* **Architecture:** `[784 Input] -> [16 Hidden] -> [16 Hidden] -> [10 Output]`
+* **Result:** The network achieves **~97% accuracy** on test data.
+* **Demo:** See `app_mnist.ipynb` for the full training loop on image data.
+
+## 🚀 Getting Started
+
+### 1. Installation
 
 ```bash
-git clone https://github.com/Alireza2317/neuralnet_from_scratch
-cd neuralnet_from_scratch
-virtualenv venv
+git clone https://github.com/Alireza2317/numpy-neural-network
+cd numpy-neural-network
+
+# Create virtual env (Recommended)
+python -m venv venv
 source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
 ```
-now that you have installed all the dependencies, you can start working with the notebooks.
 
-### Mnist dataset - handwritten digits recognition
-To test the network's performance, we will use the mnist handwritten digits database. This is sort of the *hello world* of the artificial intelligence realm, so we'll try to use this dataset to train and test the network. `app_mnist.ipynb` notebook is dedicated and designed only for that specific dataset. It's a network with 784 input neurons(since the dataset consists of images with size 28*28 pixels), two internal hidden layers containing 16 neurons each, and finally an output layer with 10 neurons, each corresponding to one digit. The network can be adjusted to use different kinds of activation functions like **sigmoid**, **ReLU** and **tanh**.
+### 2. Usage API
+The core logic resides in `NeuralNet.py`. You can use it in your own scripts like this:
 
-This simple network can reach up to 97% accuracy on the test data, which is not that bad. However the problem with this notebook is, the network's design is not at all flexible! The networks structure, meaning the number of layers and the number of neurons in each layer can't be easily changed. and this led me to build a class that handles all that and is super flexible regarding this issue.
+```python
+from NeuralNet import NeuralNetwork, Activation
 
-## Flexible Neural Network
-As mentioned, the constraints of the previous approach led me to create another notebook and basically another python class for a neural network so that it is flexible enough to be used easily to expirement how different changes affect how the neural network learns. There is a class in `app.ipynb` notebook and also `NeuralNet.py` file, which is able to be used flexibly. The parameters that are easily changable:
-- the number of layers
-- the number of neurons in each layer
-- activation of each layer
-- number of epochs in training
-- batch size
-- learning rate, and wether to use an exponential decay or not
+# 1. Define Architecture: Input(2) -> Hidden(4) -> Output(1)
+nn = NeuralNetwork(structure=[2, 4, 1], activation=Activation.Sigmoid)
+# or, if different activations per layer is required:
+# nn = NeuralNetwork(structure=[2, 4, 1], activation=[Activation.Sigmoid, Activation.Relu])
 
-### Thanks
-Thank you for checking out this project. Hope you learn something and enjoy :).
+# 2. Train
+# X: Input data, y: Target labels
+nn.train(X, y, epochs=1000, learning_rate=0.1)
+
+# 3. Predict
+predictions = nn.predict(X_test)
+```
+
+## 📂 Project Structure
+
+```text
+.
+├── NeuralNet.py             # 🧠 The Core Class: Backprop & Forward pass logic
+├── app_mnist.ipynb          # Implementation of the 784-16-16-10 network on MNIST
+├── app.ipynb                # Flexible network playground
+├── main.py                  # Script for testing structure
+└── data/                    # Dataset storage
+```
+
+## 🤝 Contributing
+Feel free to open a PR if you want to add new activation functions or optimizers!
