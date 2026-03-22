@@ -4,3 +4,4 @@ data/mnist_test.csv
 data/mnist_train.csv
 videos/
 **/__pycache__
+.vscode
