@@ -303,6 +303,7 @@ class NeuralNetwork:
 
 		return trues / total
 
+
 	def predict_output(self, sample: np.ndarray | list) -> np.ndarray:
 		"""
 		This method takes in a single sample and outputs the entire output layer.
